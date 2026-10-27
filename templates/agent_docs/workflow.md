@@ -12,12 +12,12 @@
 
 | Etapa | Nombre | Entrada | Salida |
 |---|---|---|---|
-| 1 | Descubrimiento | Brief, insumos del cliente | Contexto y preguntas abiertas en `project_status.md` |
-| 2 | Investigación | Preguntas abiertas | Informes en `docs/research/` |
-| 3 | Diseño | Hallazgos de investigación | Spec aprobada |
-| 4 | Diagramas y revisión de arquitectura | Spec | Diagramas validados; revisión contra SOLID y patrones |
+| 1 | Scaffold | Brief, insumos del cliente | Estructura creada y primer commit |
+| 2 | Diseño | Brief y preguntas abiertas | Spec aprobada |
+| 3 | Investigación | Preguntas abiertas (paralela a 2 si la spec depende de hechos externos) | Informes en `docs/research/` |
+| 4 | Patrones y diagramas | Spec | Sección "Patrones aplicados"; diagramas pertinentes y revisión de arquitectura |
 | 5 | Plan | Spec y diagramas | Plan de implementación |
-| 6 | Implementación | Plan | Código con pruebas, revisado por tarea |
+| 6 | Ejecución | Plan | Código con pruebas (TDD), revisado por tarea |
 | 7 | Cierre | Rama completa | Revisión final, seguridad si hay datos personales, docs sincronizadas |
 
 La etapa vigente se anota en `project_status.md`. Al retomar el trabajo, se lee allí y se continúa desde ese punto.

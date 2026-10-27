@@ -46,12 +46,12 @@ datos del cliente.
 
 | Etapa | Nombre | Resultado |
 |---|---|---|
-| 1 | Descubrimiento | Contexto, insumos y preguntas abiertas |
-| 2 | Investigación | Informes en `docs/research/` con fuentes y fecha de consulta |
-| 3 | Diseño | Spec aprobada en `docs/superpowers/specs/` |
-| 4 | Diagramas y revisión de arquitectura | `docs/diagrams/` validados contra la spec |
+| 1 | Scaffold | Estructura creada y primer commit |
+| 2 | Diseño | Spec aprobada en `docs/superpowers/specs/` |
+| 3 | Investigación | Informes en `docs/research/` con fuentes y fecha de consulta |
+| 4 | Patrones y diagramas | Spec con "Patrones aplicados"; `docs/diagrams/` validados contra la spec |
 | 5 | Plan | Plan de implementación en `docs/superpowers/plans/` |
-| 6 | Implementación | TDD, commits pequeños, revisión por tarea |
+| 6 | Ejecución | TDD, commits pequeños, revisión por tarea |
 | 7 | Cierre | Revisión final, seguridad si hay datos personales, sincronía de docs |
 
 La etapa vigente se registra en `agent_docs/project_status.md`. Detalle en `agent_docs/workflow.md`.
@@ -74,7 +74,7 @@ La etapa vigente se registra en `agent_docs/project_status.md`. Detalle en `agen
 
 ## Estado actual ({{date}})
 
-- [ ] Etapa 1 — Descubrimiento
+- [ ] Etapa 1 — Scaffold
 - [ ] Siguiente hito: ver `agent_docs/project_status.md`
 
 ## Instrucciones de compactación
