@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: scaffold-existing
+description: Proyecto con CLAUDE.md previo; el scaffold debe omitirlo y no sobrescribirlo. Requiere --scaffold.
+tags: [scaffold]
+context:
+  scaffold_script: fixture.sh
