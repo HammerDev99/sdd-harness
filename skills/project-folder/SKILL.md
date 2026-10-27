@@ -1,7 +1,7 @@
 ---
 name: project-folder
 description: Crea la carpeta de gestión del cliente (00_Assets a 06_Facturacion y README.md) separada del repositorio técnico, y deja la regla de separación documentada en ambos lados.
-when_to_use: Cuando el usuario pida "crear la carpeta de gestión", "carpeta del cliente", "carpeta de proyecto del cliente", "estructura de gestión" o separar propuesta, actas y facturación del repositorio técnico.
+when_to_use: Cuando el usuario pida "crear la carpeta de gestión", "carpeta del cliente", "carpeta de proyecto del cliente", "estructura de gestión", "estructura de gestión del proyecto", "carpeta en Drive", "propuesta y facturación" o separar propuesta, actas y facturación del repositorio técnico.
 ---
 
 # project-folder

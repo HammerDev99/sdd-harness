@@ -1,7 +1,7 @@
 ---
 name: design-diagrams
 description: Evalúa cuáles de ocho tipos de diagramas Mermaid son pertinentes según la spec de diseño, registra la decisión en docs/diagrams/README.md y genera y valida los diagramas pertinentes como archivos .mmd.
-when_to_use: Cuando el usuario pida "diagramas", "diagramas Mermaid", "modelo ER", "diagrama de secuencia" o esté en la etapa 4 (Diagramas y revisión de arquitectura) con una spec aprobada.
+when_to_use: Cuando el usuario pida "diagramas", "diagramas Mermaid", "modelo ER", "diagrama de secuencia", "diagrama de clases", "modelo de dominio", "diagrama de estados", "actores y funciones", "qué diagramas conviene" o esté en la etapa 4 (Diagramas y revisión de arquitectura) con una spec aprobada.
 ---
 
 # design-diagrams
