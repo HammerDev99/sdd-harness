@@ -11,9 +11,9 @@ fm_get() {
   ' "$1"
 }
 
-@test "existe al menos una skill con SKILL.md" {
+@test "existen exactamente cinco skills con SKILL.md" {
   n=$(ls skills/*/SKILL.md 2>/dev/null | wc -l)
-  [ "$n" -ge 1 ]
+  [ "$n" -eq 5 ]
 }
 
 @test "cada SKILL.md tiene menos de 500 lineas" {
