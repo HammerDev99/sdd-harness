@@ -57,10 +57,10 @@ Al invocarse de nuevo, la skill lee la etapa en `project_status.md` y continúa 
 
 - `check-deps` (SessionStart): siempre activo; avisa qué dependencias faltan.
 - `post-edit` (PostToolUse, Edit|Write): `ruff check` y `ruff format --check` sobre el `.py` editado.
-- `on-stop` (Stop): `pytest -q -x` y `mypy src`, salida recortada a diez líneas.
+- `on-stop` (Stop): `pytest -q -x` y `mypy src` (si existe `src/`), salida recortada a diez líneas.
 - `post-edit` y `on-stop` solo actúan si el proyecto tiene `pyproject.toml`.
 - Ninguno bloquea nunca: salen con 0 y devuelven el aviso como contexto.
-- El tiempo máximo de `on-stop` se configura con `stopTimeoutSeconds` (por defecto 120 s).
+- El tiempo máximo de `on-stop` se configura con `stopTimeoutSeconds` (por defecto 120 s). `timeout`/`gtimeout` (coreutils) son opcionales: sin ellos se usa `perl` (incluido en macOS); solo si falta también perl se ejecuta sin límite, con aviso. pytest y mypy reciben cada uno el presupuesto completo; el timeout de 600 s del hook en `hooks/hooks.json` es un tope externo de Claude Code.
 
 ## Criterio de paso a público
 
