@@ -1,6 +1,6 @@
 # {{project}} — Gestión del proyecto
 
-**Estado:** descubrimiento · **Última actualización:** {{date}}
+**Estado:** etapa 1 Scaffold · **Última actualización:** {{date}}
 
 > Esta carpeta guarda solo la **gestión del proyecto**. La carpeta de gestión no recibe código
 > ni documentación técnica: eso vive en el repositorio técnico. A su vez, el repositorio no

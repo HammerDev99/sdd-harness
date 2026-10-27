@@ -23,7 +23,7 @@ Si la línea no existe, la sección falta o `project_status.md` no existe, la et
 ## Detalle por etapa
 
 ### 1 Scaffold
-Si ya se cumple el gate (`ls README.md CLAUDE.md agent_docs` y `git log --oneline -1`), no vuelvas a invocar el scaffold: avanza a la etapa 2. Si no, invoca `sdd-harness:project-scaffold`. Si el proyecto tiene cliente, invoca también `sdd-harness:project-folder`. Gate: los archivos existen (`ls README.md CLAUDE.md agent_docs`) y hay un primer commit (`git log --oneline -1`). Si el usuario no ha pedido commit, propónlo y espera su respuesta; no lo hagas sin que lo pida.
+Si ya se cumple el gate (`ls README.md CLAUDE.md agent_docs` y `git log --oneline -1`), no vuelvas a invocar el scaffold: avanza a la etapa 2. Si no, invoca `sdd-harness:project-scaffold`. Si el proyecto tiene cliente, invoca también `sdd-harness:project-folder`. Gate: los archivos existen (`ls README.md CLAUDE.md agent_docs`) y hay un primer commit (`git log --oneline -1`). Si el scaffold no hizo commit (repo ya existente), propónlo y espera la respuesta del usuario; no lo hagas sin que lo pida.
 
 ### 2 Diseño
 Invoca `superpowers:brainstorming`. Gate: la spec existe en disco y el usuario la aprobó. Antes de invocar, decide si la spec depende de hechos externos (normas, APIs, referentes, cifras). Si sí, lanza la etapa 3 en paralelo y registra de inmediato `Investigación en paralelo: iniciada — <fecha>` bajo la línea de etapa. La línea de etapa permanece en `2 — Diseño` hasta que se cumplan los gates de 2 y 3.

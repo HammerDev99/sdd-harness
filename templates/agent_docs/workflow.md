@@ -2,11 +2,13 @@
 
 ## Proceso
 
-1. **Diseño** — `superpowers:brainstorming`. Resultado: spec en `docs/superpowers/specs/YYYY-MM-DD-<tema>-design.md`, aprobada por el responsable antes de planear.
-2. **Plan** — `superpowers:writing-plans` → `docs/superpowers/plans/`. Se elige ejecución inline o por subagentes.
-3. **Implementación** — TDD (`superpowers:test-driven-development`), commits pequeños en español.
-4. **Verificación** — `superpowers:verification-before-completion` antes de declarar algo listo; revisión con `superpowers:requesting-code-review`.
-5. **Investigación** — agentes paralelos (`superpowers:dispatching-parallel-agents`) para revisión de literatura; resultados en `docs/research/` con fuentes y fecha de consulta.
+1. **Scaffold** — estructura documental (`CLAUDE.md`, `agent_docs/`, `docs/`) y primer commit.
+2. **Diseño** — `superpowers:brainstorming`. Resultado: spec en `docs/superpowers/specs/YYYY-MM-DD-<tema>-design.md`, aprobada por el responsable antes de planear.
+3. **Investigación** — agentes paralelos (`superpowers:dispatching-parallel-agents`) para revisión de literatura; resultados en `docs/research/` con fuentes y fecha de consulta. Puede correr en paralelo a Diseño.
+4. **Patrones y diagramas** — patrones de diseño sobre la spec y diagramas Mermaid en `docs/diagrams/`, con revisión de arquitectura.
+5. **Plan** — `superpowers:writing-plans` → `docs/superpowers/plans/`. Se elige ejecución inline o por subagentes.
+6. **Ejecución** — TDD (`superpowers:test-driven-development`), commits pequeños en español; verificación con `superpowers:verification-before-completion`.
+7. **Cierre** — revisión final con `superpowers:requesting-code-review` y sincronía de documentos.
 
 ## Etapas del flujo
 

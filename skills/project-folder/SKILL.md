@@ -16,6 +16,7 @@ Crea la carpeta de gestión de un proyecto (propuesta, plan, actas, facturación
 ## Pasos
 
 1. Determina `management_path`. Si el usuario no la dio, pregúntala (una sola pregunta, junto con las variables que falten). Conviértela en ruta absoluta o relativa al directorio actual, sin barra final.
+   Si estás en un repositorio git (`git rev-parse --show-toplevel`) y `management_path`, ya resuelta a ruta absoluta, queda dentro de esa raíz: avisa al usuario de que el repositorio no debe recibir datos del cliente y añade la ruta, relativa a la raíz y con barra final, a `.gitignore` de la raíz si no está ya (`grep -qxF "<ruta>/" .gitignore` antes de añadir; idempotente; crea `.gitignore` si no existe). Menciónalo en el reporte final.
 2. Resuelve las variables de la plantilla: `project` (nombre del proyecto; infiérelo del mensaje, del `CLAUDE.md` o del nombre del directorio), `client` (si no hay, "sin cliente"), `description` (si no hay, "por definir"), `repo_url` (`git remote get-url origin` si existe; si no, "por definir"), `date` (`date +%Y-%m-%d`) y `plugin_version` (`jq -r .version "${CLAUDE_PLUGIN_ROOT}/.claude-plugin/plugin.json"`). Todas deben llevar valor.
 3. Crea las carpetas con un solo comando, sustituyendo la ruta real:
    `mkdir -p "<management_path>/00_Assets" "<management_path>/01_Propuesta" "<management_path>/02_Planificacion" "<management_path>/03_Ejecucion" "<management_path>/04_Control" "<management_path>/05_Cierre" "<management_path>/06_Facturacion"`
@@ -36,4 +37,4 @@ Crea la carpeta de gestión de un proyecto (propuesta, plan, actas, facturación
 
 ## Reporte final
 
-Reporte en español con dos listas: **Creados** (carpetas y archivos nuevos, incluida la sección añadida al README del repositorio) y **Omitidos** (lo que ya existía). Recuerda la regla de separación en una línea.
+Reporte en español con dos listas: **Creados** (carpetas y archivos nuevos, incluida la sección añadida al README del repositorio) y **Omitidos** (lo que ya existía). Si la carpeta quedó dentro del repositorio, indica la advertencia y la línea añadida a `.gitignore`. Recuerda la regla de separación en una línea.

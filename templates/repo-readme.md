@@ -21,7 +21,7 @@ Este repositorio **no** contiene datos del cliente.
 ## Cómo se trabaja
 
 El proyecto sigue un flujo de desarrollo guiado por especificaciones (SDD) en siete etapas:
-descubrimiento, investigación, diseño, diagramas, plan, implementación y cierre. La etapa
+Scaffold, diseño, investigación, patrones y diagramas, plan, ejecución y cierre. La etapa
 vigente y los pendientes están en `agent_docs/project_status.md`; el detalle del proceso, en
 `agent_docs/workflow.md`.
 

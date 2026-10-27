@@ -11,7 +11,7 @@ Cada variable se pasa a `render-template.sh` como `clave=valor`. Todas deben ten
 | `management_path` | Ruta de la carpeta de gestión del cliente | No se infiere | Solo si hay cliente; sin cliente: `no aplica` |
 | `repo_url` | URL del repositorio | `git remote get-url origin`, si existe | Nunca; si no hay remoto: `por definir` |
 | `date` | Fecha del scaffold | Hoy, formato `YYYY-MM-DD` (`date +%F`) | Nunca |
-| `plugin_version` | Versión del plugin sdd-harness | `jq -r .version "${CLAUDE_PLUGIN_ROOT}/.claude-plugin/plugin.json"` | Nunca |
+| `plugin_version` | Versión del plugin sdd-harness | Se obtiene en el paso 3 de `SKILL.md` (`${CLAUDE_PLUGIN_ROOT}` solo se sustituye allí) | Nunca |
 
 ## Reglas
 

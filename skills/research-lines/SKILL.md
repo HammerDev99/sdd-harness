@@ -1,7 +1,7 @@
 ---
 name: research-lines
 description: Propone de 3 a 5 líneas de investigación para un proyecto, espera aprobación, lanza un agente por línea con un brief estándar (marcas V/I/NV, fuentes con fecha) y consolida los hechos confirmados en agent_docs/project_status.md.
-when_to_use: Cuando el usuario pida "investigar", "líneas de investigación", "revisión de literatura", "levantar información del dominio", "investigar referentes", "qué dice la norma", "lanzar agentes de investigación" o esté en la etapa 2 (Investigación) del flujo SDD.
+when_to_use: Cuando el usuario pida "investigar", "líneas de investigación", "revisión de literatura", "levantar información del dominio", "investigar referentes", "qué dice la norma", "lanzar agentes de investigación" o esté en la etapa 3 (Investigación) del flujo SDD.
 ---
 
 # research-lines
@@ -27,4 +27,4 @@ Investigación en tres pasos: proponer, ejecutar en paralelo, consolidar. El pas
 
 ## Reporte final
 
-Lista los informes creados, los hechos añadidos a `project_status.md`, las preguntas que quedan por confirmar con el cliente y el siguiente paso del flujo (diseño con `superpowers:brainstorming`).
+Lista los informes creados, los hechos añadidos a `project_status.md`, las preguntas que quedan por confirmar con el cliente y el siguiente paso del flujo: si la spec (etapa 2) aún no está cerrada, incorpora los hallazgos en el diseño con `superpowers:brainstorming`; si ya lo está, la etapa 4 (Patrones y diagramas).
