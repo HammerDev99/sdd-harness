@@ -9,7 +9,8 @@ setup() {
     grep -q '^description:' "$f"
     grep -q '^tools:' "$f"
     grep -q '^model:' "$f"
-    ! grep -qE '^(permissionMode|hooks):' "$f"
+    run grep -qE "^(permissionMode|hooks):" "$f"
+    [ "$status" -ne 0 ]
   done
 }
 
