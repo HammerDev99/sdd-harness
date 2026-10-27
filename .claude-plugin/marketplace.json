@@ -1,0 +1,14 @@
+{
+  "name": "sdd-harness",
+  "description": "Marketplace local del plugin sdd-harness (Spec-Driven Development con harness de calidad).",
+  "owner": {
+    "name": "Daniel Arbeláez Álvarez"
+  },
+  "plugins": [
+    {
+      "name": "sdd-harness",
+      "source": "./",
+      "description": "Harness de calidad para Spec-Driven Development: scaffold de documentación, agentes revisores y hooks para Python."
+    }
+  ]
+}

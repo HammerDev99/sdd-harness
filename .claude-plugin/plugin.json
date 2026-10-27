@@ -1,0 +1,17 @@
+{
+  "name": "sdd-harness",
+  "version": "0.1.0",
+  "description": "Integra SDD (Spec-Driven Development) con un harness de calidad: scaffold de documentación por niveles, investigación con agentes, diagramas de diseño, agentes revisores y hooks de calidad para Python.",
+  "author": {
+    "name": "Daniel Arbeláez Álvarez"
+  },
+  "license": "MIT",
+  "userConfig": {
+    "stopTimeoutSeconds": {
+      "type": "number",
+      "title": "Timeout del hook Stop",
+      "description": "Segundos máximos que el hook Stop puede tardar ejecutando las verificaciones de calidad.",
+      "default": 120
+    }
+  }
+}

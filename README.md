@@ -9,3 +9,10 @@ skills de superpowers en vez de duplicarlas.
 
 Origen: metodología CDAID v2 del repo `sdd-framework` y la estructuración del proyecto
 Control_Biologicos_Vacunacion (2026-10-27), que sirve de caso de referencia.
+
+## Desarrollo
+
+- Probar el plugin localmente: `claude --plugin-dir .`
+- Recargar tras cambios: `/reload-plugins`
+- Ejecutar las pruebas: `bats tests/`
+- Validar el manifiesto: `claude plugin validate --strict .`
