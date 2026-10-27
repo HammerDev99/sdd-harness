@@ -12,7 +12,7 @@ setup() {
 @test "render falla si falta variable" {
   run scripts/render-template.sh templates/CLAUDE.md "$OUT/c.md" project=Demo
   [ "$status" -eq 1 ]
-  [[ "$output" == *"Faltan variables"* ]]
+  [[ "$output" == *"Faltan variables"* ]] || false
   [ ! -f "$OUT/c.md" ]
 }
 
@@ -20,7 +20,7 @@ setup() {
   echo "original" > "$OUT/e.md"
   run scripts/render-template.sh templates/docs-readme.md "$OUT/e.md" project=Demo date=2026-10-27 plugin_version=0.1.0
   [ "$status" -eq 0 ]
-  [[ "$output" == *"Omitido"* ]]
+  [[ "$output" == *"Omitido"* ]] || false
   [ "$(cat "$OUT/e.md")" = "original" ]
 }
 
@@ -57,7 +57,7 @@ setup() {
 @test "append crea, anexa y no duplica el bloque" {
   run scripts/render-template.sh --append templates/gitignore "$OUT/.gitignore"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"Creado"* ]]
+  [[ "$output" == *"Creado"* ]] || false
   printf 'node_modules/\n' > "$OUT/g2"
   run scripts/render-template.sh --append templates/gitignore "$OUT/g2"
   [ "$status" -eq 0 ]
@@ -65,7 +65,7 @@ setup() {
   grep -q 'sdd-harness: datos sensibles' "$OUT/g2"
   run scripts/render-template.sh --append templates/gitignore "$OUT/g2"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"Omitido (bloque presente)"* ]]
+  [[ "$output" == *"Omitido (bloque presente)"* ]] || false
   [ "$(grep -c 'sdd-harness: datos sensibles' "$OUT/g2")" -eq 1 ]
 }
 

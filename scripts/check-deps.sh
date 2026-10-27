@@ -8,6 +8,11 @@
 
 cat >/dev/null 2>&1 || true
 
+if ! command -v jq >/dev/null 2>&1; then
+  printf '%s\n' "sdd-harness: falta jq; los hooks de sdd-harness no funcionarán"
+  exit 0
+fi
+
 plugins_dir="${CLAUDE_PLUGINS_DIR:-$HOME/.claude/plugins}"
 skills_dir="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
 

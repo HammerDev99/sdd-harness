@@ -4,6 +4,7 @@
 # Salida: JSON con systemMessage (lo ve el usuario); nunca bloquea el cierre.
 # Timeout: SDD_STOP_TIMEOUT, si no el valor de userConfig stopTimeoutSeconds
 # (CLAUDE_PLUGIN_OPTION_STOPTIMEOUTSECONDS), si no 120 s.
+# Sin timeout/gtimeout usa perl (alarm). pytest y mypy tienen cada uno el presupuesto completo.
 # Siempre sale con 0. Compatible con bash 3.2.
 
 input="$(cat)"
@@ -33,8 +34,11 @@ if command -v timeout >/dev/null 2>&1; then
   limite=(timeout "$segundos")
 elif command -v gtimeout >/dev/null 2>&1; then
   limite=(gtimeout "$segundos")
+elif command -v perl >/dev/null 2>&1; then
+  # perl viene con macOS: alarm + exec; SIGALRM termina con rc 142
+  limite=(perl -e 'alarm shift; exec @ARGV or exit 127' "$segundos")
 else
-  sin_limite="(sin límite de tiempo: no hay timeout ni gtimeout) "
+  sin_limite="(sin límite de tiempo: no hay timeout, gtimeout ni perl) "
 fi
 
 usar_uv=0
@@ -56,7 +60,7 @@ fi
 salida="$("${limite[@]}" "${pytest_cmd[@]}" -q -x -p no:cacheprovider 2>&1)"
 rc=$?
 mensaje="$(prefijar "$salida")"
-if [ "$rc" -eq 124 ]; then
+if [ "$rc" -eq 124 ] || [ "$rc" -eq 142 ]; then
   mensaje="sdd-harness/tests: pytest superó el límite de ${segundos}s y se interrumpió.
 $mensaje"
 fi
@@ -78,6 +82,11 @@ if [ -d "$PROJECT/src" ]; then
 sdd-harness/tests: mypy no disponible; se omite la verificación de tipos."
   else
     salida_mypy="$("${limite[@]}" "${mypy_cmd[@]}" src 2>&1)"
+    rc_mypy=$?
+    if [ "$rc_mypy" -eq 124 ] || [ "$rc_mypy" -eq 142 ]; then
+      mensaje="$mensaje
+sdd-harness/mypy: mypy superó el límite de ${segundos}s y se interrumpió."
+    fi
     mensaje="$mensaje
 $(printf '%s\n' "$salida_mypy" | tail -n 10 | sed 's/^/sdd-harness\/mypy: /')"
   fi
