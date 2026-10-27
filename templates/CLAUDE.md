@@ -16,6 +16,8 @@ Scaffold: sdd-harness {{plugin_version}} ({{date}})
 - Repositorio técnico: {{repo_url}}
 - Stack: {{stack}}
 
+Datos personales: por definir
+
 La carpeta de gestión no recibe código ni documentación técnica; este repositorio no recibe
 datos del cliente.
 
@@ -23,8 +25,8 @@ datos del cliente.
 
 1. **Datos del cliente nunca al repo.** Hojas de cálculo, PDF, nombres, documentos de
    identidad y credenciales viven en la carpeta de gestión o en `data/` (ignorado por git).
-   Demos a terceros con datos anonimizados. Si el proyecto trata datos personales, decláralo
-   aquí y activa la revisión de seguridad en la etapa de cierre.
+   Demos a terceros con datos anonimizados. Si el proyecto trata datos personales, cambia
+   la línea `Datos personales:` del contexto a `Datos personales: sí` y activa la revisión de seguridad en la etapa de cierre.
 2. **Spec aprobada antes de código.** No se escribe código del producto sin una spec de
    diseño aprobada por el responsable del proyecto.
 3. **Normalizar antes de calcular.** Entidades separadas, sin totales embebidos en filas de
@@ -52,7 +54,7 @@ datos del cliente.
 | 4 | Patrones y diagramas | Spec con "Patrones aplicados"; `docs/diagrams/` validados contra la spec |
 | 5 | Plan | Plan de implementación en `docs/superpowers/plans/` |
 | 6 | Ejecución | TDD, commits pequeños, revisión por tarea |
-| 7 | Cierre | Revisión final, seguridad si hay datos personales, sincronía de docs |
+| 7 | Cierre | Revisión final, revisión de seguridad según la declaración del contexto, sincronía de docs |
 
 La etapa vigente se registra en `agent_docs/project_status.md`. Detalle en `agent_docs/workflow.md`.
 

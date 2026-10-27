@@ -34,7 +34,10 @@ Un proyecto nuevo (con o sin cliente) es siempre arquitectural.
 
 1. Comprueba si existe el archivo con `ls agent_docs/project_status.md`.
 2. Si existe, localiza la línea con `grep -n "^Etapa del flujo: [0-9]" agent_docs/project_status.md`. El formato es `Etapa del flujo: N — nombre — fecha`. Ignora la línea de ejemplo del encabezado de formato si la hay (la línea válida empieza por `Etapa del flujo: ` seguida de un dígito).
-3. Si la línea indica una etapa N (1 a 7), esa es la etapa pendiente: informa al usuario "Retomo en la etapa N — nombre" y continúa desde ahí. Antes de ejecutarla, verifica el gate de la etapa N-1 contra `stages.md`; si no se cumple, retrocede a esa etapa.
+3. Si la línea indica una etapa N (1 a 7), esa es la etapa pendiente: informa al usuario "Retomo en la etapa N — nombre" y continúa desde ahí, con estas comprobaciones previas:
+   - **N = 1:** comprueba primero el gate de la etapa 1: `ls README.md CLAUDE.md agent_docs` (los tres existen) y `git log --oneline -1` (hay al menos un commit). Si se cumple, NO vuelvas a invocar `sdd-harness:project-scaffold`: registra el avance (paso 4) hacia la etapa 2 y continúa allí. Si falta algo, invoca solo lo que falte (el scaffold es idempotente) y, si falta el commit, propónlo al usuario.
+   - **N entre 2 y 7:** verifica el gate de la etapa N-1 contra `stages.md`; si no se cumple, retrocede a esa etapa.
+   - **N = 2:** busca además la línea `Investigación en paralelo:` con `grep -n "^Investigación en paralelo:" agent_docs/project_status.md` y revisa `ls docs/research/`. Si dice `iniciada`, la investigación sigue abierta: comprueba el gate de la etapa 3 (informes en `docs/research/` y hallazgos en `project_status.md`) y, si no se cumple, reanuda `sdd-harness:research-lines` junto con el diseño. Si ya existe la spec aprobada pero la investigación está pendiente, reanuda solo la etapa 3. La línea de etapa pasa a 4 únicamente cuando los gates de 2 y 3 estén cumplidos.
 4. Si el archivo o la línea no existen, la etapa pendiente es la 1. Si el directorio ya contiene un proyecto, verifica gate por gate desde la etapa 1 qué está realmente cerrado y empieza en la primera etapa sin evidencia.
 5. `Etapa del flujo: 7 — Cierre completado` significa flujo terminado: informa y pregunta si el usuario quiere iniciar una nueva iteración (vuelve al paso 1).
 
@@ -44,9 +47,9 @@ Para cada etapa pendiente, en orden: invoca lo que indica `stages.md`, verifica 
 
 **Etapa 1, Scaffold.** Invoca `sdd-harness:project-scaffold`. Si el proyecto tiene cliente, invoca después `sdd-harness:project-folder`. En un proyecto nuevo con cliente esta etapa va **antes** del brainstorming: la estructura y el `CLAUDE.md` deben existir cuando se diseñe. Si falta nombre, cliente o stack, pregunta una sola vez antes de invocar.
 
-**Etapa 2, Diseño.** Invoca `superpowers:brainstorming`. Antes de empezar, decide si la spec dependerá de hechos externos (normas, APIs de terceros, referentes, cifras). Si sí, arranca la etapa 3 en paralelo.
+**Etapa 2, Diseño.** Invoca `superpowers:brainstorming`. Antes de empezar, decide si la spec dependerá de hechos externos (normas, APIs de terceros, referentes, cifras). Si sí, arranca la etapa 3 en paralelo y registra de inmediato, bajo la línea `Etapa del flujo: 2 — ...`, la línea `Investigación en paralelo: iniciada — <fecha>` (paso 4).
 
-**Etapa 3, Investigación.** Invoca `sdd-harness:research-lines`. Si corre en paralelo a la etapa 2, lanza las líneas aprobadas en segundo plano mientras sigue el brainstorming, e incorpora los hallazgos a la spec cuando lleguen. No cierres la etapa 2 hasta que la 3 haya terminado o el usuario decida prescindir de ella; si decide prescindir, anótalo en `project_status.md`.
+**Etapa 3, Investigación.** Invoca `sdd-harness:research-lines`. Si corre en paralelo a la etapa 2, lanza las líneas aprobadas en segundo plano mientras sigue el brainstorming, e incorpora los hallazgos a la spec cuando lleguen. No cierres la etapa 2 hasta que la 3 haya terminado o el usuario decida prescindir de ella; si decide prescindir, cambia la línea a `Investigación en paralelo: omitida — <fecha>`. Al cerrarla, cámbiala a `Investigación en paralelo: completada — <fecha>`.
 
 **Etapa 4, Patrones y diagramas.** Orden fijo: primero `anthropic-skills:design-patterns` sobre la spec; después añade a la spec la sección `## Patrones aplicados` (es obligatoria; si ningún patrón aplica, la sección lo declara con su razón); luego `sdd-harness:design-diagrams`; por último dispara el agente `sdd-harness:senior-architect` para que revise la spec y los diagramas. Presenta sus hallazgos al usuario y resuelve los bloqueantes antes del gate.
 
@@ -54,7 +57,7 @@ Para cada etapa pendiente, en orden: invoca lo que indica `stages.md`, verifica 
 
 **Etapa 6, Ejecución.** Ejecuta con el método elegido. Cada tarea sigue `superpowers:test-driven-development`. En el paso REFACTOR de cada ciclo, recuerda invocar `anthropic-skills:refactoring` (catálogo de smells y técnicas) y repítelo en los briefs de los implementadores. El gate exige todas las tareas completas en el ledger.
 
-**Etapa 7, Cierre.** Invoca `superpowers:requesting-code-review` y dispara `sdd-harness:code-reviewer` con el catálogo de `anthropic-skills:refactoring` como instrumento de revisión. Comprueba con `grep -n -i "datos personales\|PII" CLAUDE.md` si el proyecto declara datos personales; solo en ese caso dispara `sdd-harness:security-scanner`. Dispara `sdd-harness:doc-auditor` para verificar la sincronía entre código y documentación. Resuelve los hallazgos y cierra con `superpowers:finishing-a-development-branch`.
+**Etapa 7, Cierre.** Invoca `superpowers:requesting-code-review` y dispara `sdd-harness:code-reviewer` con el catálogo de `anthropic-skills:refactoring` como instrumento de revisión. Comprueba con `grep -n "^Datos personales:" CLAUDE.md` la declaración de datos personales. Solo si la línea es `Datos personales: sí` dispara `sdd-harness:security-scanner`. Si dice `Datos personales: por definir` (o la línea no existe), pregunta al usuario, actualiza la línea a `Datos personales: sí` o `Datos personales: no` y decide según su respuesta. Dispara `sdd-harness:doc-auditor` para verificar la sincronía entre código y documentación. Resuelve los hallazgos y cierra con `superpowers:finishing-a-development-branch`.
 
 ## Paso 4: registrar el avance
 
@@ -65,7 +68,7 @@ Al cumplirse el gate de una etapa, y antes de iniciar la siguiente:
 3. Si la etapa produjo datos que la tabla pide registrar (método de ejecución, hallazgos), añádelos bajo las secciones correspondientes del mismo archivo.
 4. Si el archivo no existe aún (la etapa 1 lo crea), escríbelo recién creado el scaffold.
 
-Las etapas 2 y 3 en paralelo: escribe la línea de la etapa 4 solo cuando ambos gates estén cumplidos.
+Las etapas 2 y 3 en paralelo: la línea de etapa se queda en `2 — Diseño` mientras dure la investigación, acompañada de la línea `Investigación en paralelo: iniciada — <fecha>` (se añade justo debajo de la línea de etapa). Escribe la línea de la etapa 4 solo cuando ambos gates estén cumplidos, y en ese mismo momento actualiza la línea de investigación a `completada` u `omitida`. Si el usuario decide investigar después de cerrar la spec, escribe `3 — Investigación` como etapa pendiente.
 
 ## Reporte final
 

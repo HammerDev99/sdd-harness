@@ -18,7 +18,7 @@
 | 4 | Patrones y diagramas | Spec | Sección "Patrones aplicados"; diagramas pertinentes y revisión de arquitectura |
 | 5 | Plan | Spec y diagramas | Plan de implementación |
 | 6 | Ejecución | Plan | Código con pruebas (TDD), revisado por tarea |
-| 7 | Cierre | Rama completa | Revisión final, seguridad si hay datos personales, docs sincronizadas |
+| 7 | Cierre | Rama completa | Revisión final, revisión de seguridad según la declaración de `CLAUDE.md`, docs sincronizadas |
 
 La etapa vigente se anota en `project_status.md`. Al retomar el trabajo, se lee allí y se continúa desde ese punto.
 
