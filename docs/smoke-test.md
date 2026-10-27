@@ -64,3 +64,9 @@ Verificaciones:
 - [ ] Existe al menos un commit (`git log --oneline`)
 
 Resultado: _(fecha, observaciones)_
+
+## 5. Evals (`claude plugin eval`)
+
+Los prompts de `evals/` son autosuficientes (incluyen nombre, descripción, cliente, stack y ruta de gestión) porque cada eval corre en una sola sesión no interactiva. La clave `plugins:` de un caso solo apunta a los plugins bajo prueba (rutas relativas al caso), no a plugins adicionales, así que no se puede cargar superpowers desde ahí de forma portable.
+
+Nota: el caso `workflow-routes` exige que `superpowers:brainstorming` esté disponible en la sesión que ejecuta el eval (el grader comprueba el intento de llamada a la skill). Si no lo está, ajusta o descarta ese grader según el entorno.
